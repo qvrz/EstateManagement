@@ -1,0 +1,35 @@
+server:
+  port: 8097    #default port where the service will be started
+
+eureka:         #tells about the Eureka server details and its refresh time
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
+spring:
+  application:
+    name: order-service   #current service name to be used by the eureka server
+  datasource:
+    url: jdbc:mysql://localhost:3306/integracja?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: test
+  jpa:
+    hibernate:
+      ddl-auto: create
+  main:
+    allow-bean-definition-overriding: true
+management:
+  security:
+    enabled: false  #disable the spring security on the management endpoints like /env, /refresh etc.
+
+
+logging:
+  level:
+    com.example.eureka: DEBUG
